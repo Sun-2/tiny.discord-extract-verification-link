@@ -23,13 +23,14 @@ imap.once("ready", () => {
     imap.seq.search(
       [
         ["FROM", "noreply@discordapp.com"],
-        ["SINCE", new Date(Date.now() - 60 * 60 * 1000)],
+        ["SINCE", new Date(Date.now() - 60 * 60 * 1000).toISOString()],
       ],
       (error, uids) => {
         if (error) throw error;
         const [mailId, ...otherMailIds] = uids;
         if (!mailId) {
           console.log("No mail found, exiting.");
+          process.exit(1);
         }
 
         const f = imap.seq.fetch(mailId, {
