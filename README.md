@@ -1,0 +1,1 @@
+Extracts the Discord verification link for the given account via IMAP.
